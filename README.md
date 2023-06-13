@@ -12,6 +12,7 @@ This repository contains examples and code snippets showcasing various methods t
   - [Supported Video Formats](#supported-video-formats)
   - [Contributing](#contributing)
   - [License](#license)
+  - [GPU decoding and encoding](#gpu-decoding-and-encoding)
 
 ## Introduction
 
@@ -46,3 +47,7 @@ Contributions to this repository are welcome! If you have additional encoding me
 
 The content of this repository is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code and examples provided. However, please note that any usage of third-party libraries or dependencies may be subject to their respective licenses.
 
+## GPU decoding and encoding
+bash```
+gst-launch-1.0 filesrc location=dance.mp4 ! qtdemux ! h264parse ! nvv4l2decoder  ! nvvideoconvert ! queue !  nvv4l2h264enc ! rtph264pay ! queue name=stuttering_queue ! udpsink port=5000 host=127.0.0.1
+```
