@@ -245,7 +245,7 @@ class Decoder(multiprocessing.Process):
 	#filesrc location=1.mp4 ! qtdemux ! decodebin ! videoconvert \
     # videotestsrc pattern=18
     # v4l2src device=/dev/video0
-        self.pipeline = Gst.parse_launch('v4l2src device=/dev/video1 \
+        self.pipeline = Gst.parse_launch('videotestsrc pattern=18 \
                               ! videoscale ! video/x-raw,width=1920,height=1080 ! videoconvert ! videoconvert ! capsfilter ! video/x-raw,format=I420 ! videoconvert !  videoconvert ! x264enc speed-preset=slower subme=10 tune=zerolatency bitrate=2000 ! rtph264pay ! udpsink name=udpsink'.format(self.location,',width='+str(self.width)+',height='+str(self.height) if self.width and self.height else ''))
         
         sink = self.pipeline.get_by_name('udpsink')

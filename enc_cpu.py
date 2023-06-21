@@ -430,7 +430,9 @@ class Cap_Gstremer:
 
 
     def image_create(self):
-        self.cap = cv2.VideoCapture('/home/ajith/Downloads/dance.mp4')
+        index = 0
+        vids = ['1.mp4','2.mp4','3.mp4']
+        self.cap = cv2.VideoCapture(vids[index])
         while True:
             ret, image=self.cap.read()
             # image=np.zeros((300,300,3)).astype('uint8')
@@ -441,7 +443,10 @@ class Cap_Gstremer:
             else:
                 cv2.putText(image, str("Restarting"), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 1)
                 self.cap.release()
-                self.cap = cv2.VideoCapture('/home/ajith/Downloads/dance.mp4')
+                index = index + 1
+                if index >2 :
+                    index = 0
+                self.cap = cv2.VideoCapture(vids[index])
             time.sleep(1/30)
 
 
